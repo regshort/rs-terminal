@@ -8,7 +8,7 @@
     "types": "tsc --noEmit",
     "update:per": "yarn add @shortex/perspective @shortex/perspective-viewer @shortex/perspective-viewer-d3fc @shortex/perspective-viewer-datagrid @shortex/perspective-webpack-plugin @shortex/perspective-workspace",
     "pull": "git pull && yarn && yarn build && pm2 restart nextjs",
-    "startPM2": "pm2 start yarn --name 'nextjs' -- start"
+    "pm2": "pm2 start yarn --name 'terminal' -- start"
   },
   "name": "shortex-terminal",
   "version": "0.1.2",
