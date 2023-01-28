@@ -1,5 +1,4 @@
 import { Callout, EditableText, FormGroup, H5, Switch } from "@blueprintjs/core"
-import { dateIndexToString } from "gutils"
 import { useSession } from "next-auth/react"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import useSWR, { useSWRConfig } from "swr"
@@ -9,9 +8,10 @@ import { dateIndex } from "../../../redux/menuSlice"
 import {
   WSC_Active,
   WSC_setActiveDescription,
-  WSC_setActiveName,
+  WSC_setActiveName
 } from "../../../redux/workspaceControlSlice"
 import { fetcher } from "../../layout"
+import { dateIndexToString } from "../../../lib/dateRangeIndex2String"
 
 function WorkspaceSettings() {
   const dispatch = useAppDispatch()
@@ -64,31 +64,31 @@ function WorkspaceSettings() {
     if (formName === undefined || formName === active.name) return
     await fetch(`/api/workspace/${active.id}`, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         creator: active.creator,
         id: active.id,
         data: {
-          name: formName,
-        },
+          name: formName
+        }
       }),
-      method: "PATCH",
+      method: "PATCH"
     })
-      .then(function (response) {
+      .then(function(response) {
         if (response.ok) {
           return response.json()
         }
-        return response.json().then(function (json) {
+        return response.json().then(function(json) {
           throw json
         })
       })
-      .then((e) => {
+      .then(e => {
         addToast({ message: "Successfully updated name" })
         mutate("/api/workspace")
         dispatch(WSC_setActiveName(formName))
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err)
       })
   }, [formName, active.name, active.id, active.creator, mutate, dispatch])
@@ -99,17 +99,17 @@ function WorkspaceSettings() {
 
     await fetch(`/api/workspace/${active.id}`, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         data: {
-          description: formDescription,
+          description: formDescription
         },
         creator: active.creator,
-        id: active.id,
+        id: active.id
       }),
-      method: "PATCH",
-    }).then((e) => {
+      method: "PATCH"
+    }).then(e => {
       addToast({ message: "Successfully updated description" })
       dispatch(WSC_setActiveDescription(formDescription))
       mutate("/api/workspace")
@@ -120,25 +120,25 @@ function WorkspaceSettings() {
     active.creator,
     dispatch,
     mutate,
-    formDescription,
+    formDescription
   ])
 
   const submitChanges = useCallback(async () => {
     await fetch(`/api/workspace/${active.id}`, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         data: {
           private: formPrivate,
           watchlist: formWatchlist,
-          relative_date: dateIndexToString(relativeDate),
+          relative_date: dateIndexToString(relativeDate)
         },
         creator: active.creator,
-        id: active.id,
+        id: active.id
       }),
-      method: "PATCH",
-    }).then((e) => {
+      method: "PATCH"
+    }).then(e => {
       addToast({ message: "Successfully saved workspace" })
       mutate("/api/workspace")
     })
@@ -148,7 +148,7 @@ function WorkspaceSettings() {
     formPrivate,
     formWatchlist,
     relativeDate,
-    mutate,
+    mutate
   ])
 
   async function makeDefault(id2set: any) {
@@ -157,13 +157,13 @@ function WorkspaceSettings() {
     await fetch(`/api/user/`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         data: {
-          defaultWorkspaceId: unset ? "" : id2set,
-        },
-      }),
+          defaultWorkspaceId: unset ? "" : id2set
+        }
+      })
     })
       .then((res: any) => {
         mutate("/api/user/default")
@@ -171,10 +171,10 @@ function WorkspaceSettings() {
           message: !unset
             ? `Updated user default to ${id2set}`
             : `Unset user default to none`,
-          intent: "success",
+          intent: "success"
         })
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err)
       })
   }
@@ -233,7 +233,7 @@ function WorkspaceSettings() {
             innerLabelChecked="on"
             innerLabel="off"
             defaultChecked={formPrivate}
-            onChange={(e) => {
+            onChange={e => {
               // e.preventDefault()
               setFormPrivate(!formPrivate)
               setChanged(true)

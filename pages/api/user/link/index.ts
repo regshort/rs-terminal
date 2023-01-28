@@ -55,7 +55,7 @@ export default async function handler(req: any, res: any) {
           key: req.body.id
         }
       })
-      .then(async (e: { creator: string; key: any }) => {
+      .then(async (e: any) => {
         if (e?.creator === session.user.id) {
           await prisma.link
             .delete({

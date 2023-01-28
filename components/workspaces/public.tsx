@@ -15,15 +15,14 @@ import {
 import useSWR, { mutate } from "swr"
 import { useSession } from "next-auth/react"
 import moment from "moment"
-import useSWRImmutable from "swr/immutable"
 import { addToast } from "../../pages/_app"
 import { fetcher } from "../layout"
 import { useTheme } from "next-themes"
 import { WSC_setActive } from "../../redux/workspaceControlSlice"
 import { useAppDispatch } from "../../redux/hooks"
 import { MenuItem2, Popover2, Tooltip2 } from "@blueprintjs/popover2"
-import { Select2 } from "@blueprintjs/select"
-import { useEffect, useMemo, useState } from "react"
+import { useState, useEffect, useMemo } from "react"
+import { Flex } from "../../stitches.config"
 
 function PublicWorkspaces(props: any) {
   const dispatch = useAppDispatch()

@@ -1,7 +1,6 @@
 import { Text, Tag } from "@blueprintjs/core"
 import { useCallback, useEffect, useState } from "react"
 import Marquee from "react-fast-marquee"
-import { Flex } from "../../../../stitches.config"
 import useSWR from "swr"
 import { addToast } from "../../pages/_app"
 import { getCompanies } from "../../redux/companySlice"
@@ -12,6 +11,7 @@ import {
 } from "../../redux/workspaceControlSlice"
 import { fetcher } from "../layout"
 import { marqueeSpeed, showTickerMarquee } from "../../redux/settingsSlice"
+import { Flex } from "../../stitches.config"
 
 function ScrollingSecs() {
   const [selectedItem, setSelectedItem] = useState<any>()
@@ -83,7 +83,7 @@ function ScrollingSecs() {
     if (selectedItem === undefined) return
     handleSubmitCF()
   }, [selectedItem, handleSubmitCF])
-  const listItems = data.map(sec => {
+  const listItems = data.map((sec: any) => {
     return (
       <Tag
         minimal

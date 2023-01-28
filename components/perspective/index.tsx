@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import * as perspective from "@finos/perspective"
 import { useAppSelector, useAppDispatch } from "../../redux/hooks"
 import "@finos/perspective-workspace"
@@ -13,23 +13,29 @@ import {
   WSC_Active,
   WSC_ActiveConfigSetter,
   WSC_ActiveSetter,
-  WSC_CurrentConfig,
   WSC_DataSelector,
   WSC_Query,
   WSC_setActive,
   WSC_setActiveSetterOnly,
   WSC_setChanges,
   WSC_setConfigSetter,
-  WSC_setCurrentConfig,
+  WSC_setCurrentConfig
 } from "../../redux/workspaceControlSlice"
 import { useRouter } from "next/router"
 import NonIdeal from "./nonIdeal"
-import { dateStringToIndex, string2DateRange } from "gutils"
 import moment from "moment"
 import _ from "lodash"
 import { setDateIndex, setDateRange } from "../../redux/menuSlice"
 import useSWR from "swr"
-import { setWsStatus, showTickerMarquee, wsStatus } from "../../redux/settingsSlice"
+import {
+  setWsStatus,
+  showTickerMarquee,
+  wsStatus
+} from "../../redux/settingsSlice"
+import {
+  dateStringToIndex,
+  string2DateRange
+} from "../../lib/dateRangeIndex2String"
 
 // Required because perspective-workspace doesn't export type declarations
 declare global {
@@ -42,7 +48,6 @@ declare global {
     }
   }
 }
-
 
 function Perspective() {
   const dispatch = useAppDispatch()
@@ -73,14 +78,14 @@ function Perspective() {
 
   const applyConfig = useCallback(
     async (workspaces: any) => {
-      console.log('apply config', workspaces);
+      console.log("apply config", workspaces)
       await workspace.current.restore(workspaces)
 
-      if (ws_status === "close"){
+      if (ws_status === "close") {
         addToast({
           message: "no connection to server",
           intent: "danger",
-          icon: "offline",
+          icon: "offline"
         })
         return
       }
@@ -90,13 +95,13 @@ function Perspective() {
       if (workspace) {
         await workspace.current.restore(workspaces)
         return true
-      }else{
-        console.log(workspace, 'workspace');
-        
+      } else {
+        console.log(workspace, "workspace")
+
         addToast({
           message: "!workspace",
           intent: "danger",
-          icon: "offline",
+          icon: "offline"
         })
       }
       return false
@@ -109,13 +114,13 @@ function Perspective() {
     if (wsDefault === undefined || wsUserDefault === undefined || defaultDone)
       return
     if (query) {
-      await fetch(`/api/workspace/${query}`).then(async (e) => {
+      await fetch(`/api/workspace/${query}`).then(async e => {
         const d = await e.json()
         if (d.content === null) {
           addToast({
             message: "Not able to find workspace",
             intent: "warning",
-            icon: "warning-sign",
+            icon: "warning-sign"
           })
           router.push("/")
           return
@@ -124,7 +129,7 @@ function Perspective() {
         addToast({
           message: "Loaded workspace from query",
           intent: "success",
-          icon: "tick",
+          icon: "tick"
         })
       })
       return
@@ -134,7 +139,7 @@ function Perspective() {
       addToast({
         message: "Loaded default user workspace",
         intent: "success",
-        icon: "tick",
+        icon: "tick"
       })
       dispatch(WSC_setActive(wsUserDefault))
       return
@@ -142,7 +147,7 @@ function Perspective() {
       addToast({
         message: "Loaded default global workspace",
         intent: "success",
-        icon: "tick",
+        icon: "tick"
       })
       dispatch(WSC_setActive(wsDefault))
       return
@@ -153,7 +158,7 @@ function Perspective() {
     if (workspace.current) {
       for (let i = 0; i < workspace.current.children.length; i++) {
         workspace.current.children[i].restore({
-          theme: theme === "dark" ? "Material Dark" : "Material Light",
+          theme: theme === "dark" ? "Material Dark" : "Material Light"
         })
       }
     }
@@ -166,7 +171,7 @@ function Perspective() {
         addToast({
           message: "No viewes found to apply this filter to",
           intent: "danger",
-          icon: "error",
+          icon: "error"
         })
         dispatch(setDateRange([null, null]))
         return
@@ -195,7 +200,7 @@ function Perspective() {
             addToast({
               message: "setting filter to date with master",
               intent: "warning",
-              icon: "calendar",
+              icon: "calendar"
             })
           }
         })
@@ -229,7 +234,7 @@ function Perspective() {
         addToast({
           message: "setting date filter",
           intent: "warning",
-          icon: "calendar",
+          icon: "calendar"
         })
       }
     },
@@ -258,16 +263,25 @@ function Perspective() {
     const apply = await applyConfig(wscActive.workspace)
     if (!apply) return
     applyTheme()
-  }, [wscActive.workspace, wscActive.name, wscActive.relativeDate, defaultDone, applyConfig, applyTheme, handleRangeChange, dispatch])
+  }, [
+    wscActive.workspace,
+    wscActive.name,
+    wscActive.relativeDate,
+    defaultDone,
+    applyConfig,
+    applyTheme,
+    handleRangeChange,
+    dispatch
+  ])
 
   const changes = useCallback(async () => {
     if (newConfig !== undefined && newConfig !== null && wscActive !== null) {
       const changes = jsonDiff.diff(newConfig, wscActive.workspace)
       let listOfChanges: any[] = []
       if (changes !== undefined && changes !== null) {
-        Object.keys(changes).map((key) => {
+        Object.keys(changes).map(key => {
           if (!changes[key]) return
-          Object.keys(changes[key]).map((key2) => {
+          Object.keys(changes[key]).map(key2 => {
             // simply ignoring settings and theme keys,
             // these will still be saved in the workspace but won't be look at as a change
             if (Object.keys(changes[key][key2]).includes("settings")) return
@@ -281,9 +295,11 @@ function Perspective() {
     }
   }, [newConfig, wscActive, dispatch])
 
-  const init = useCallback(async () => {    
-    if (websocket === undefined){
-      setWebsocket(perspective.default.websocket(process.env.NEXT_PUBLIC_WS_URL as string))
+  const init = useCallback(async () => {
+    if (websocket === undefined) {
+      setWebsocket(
+        perspective.default.websocket(process.env.NEXT_PUBLIC_WS_URL as string)
+      )
     }
     if (websocket === undefined || websocket === null) return
     // we get dataSelector here if null return to default
@@ -311,14 +327,13 @@ function Perspective() {
       addToast({
         message: "Selecting data " + dataSelector,
         icon: "database",
-        intent: "primary",
+        intent: "primary"
       })
-    }    
+    }
     await workspace.current.addTable("main", table)
   }, [dataSelector, websocket])
 
   const newViewInit = useCallback(() => {
-
     setTimeout(async () => {
       for (let index = 0; index < workspace.current.children.length; index++) {
         if (
@@ -334,7 +349,7 @@ function Perspective() {
           //   filter: [["ticker", "==", "GME"]],
           // })
           workspace.current.children[index].restore({
-            theme: theme === "light" ? "Material Light" : "Material Dark",
+            theme: theme === "light" ? "Material Light" : "Material Dark"
           })
           // how to set name but better if user types it
           // workspace.current.shadowRoot.querySelector('.p-TabBar-tabLabel').setAttribute('value', 'autoGenerated Name')
@@ -344,22 +359,19 @@ function Perspective() {
     }, 1)
   }, [workspace, theme])
 
-
   useEffect(() => {
-  if (websocket){
-    
-    websocket._ws.onopen = (e:any) => {
-      websocket._ws.send(JSON.stringify({id: -1,cmd: "init",})); //perspective does this in onopen so we do the same here
-      dispatch(setWsStatus(e.type))
+    if (websocket) {
+      websocket._ws.onopen = (e: any) => {
+        websocket._ws.send(JSON.stringify({ id: -1, cmd: "init" })) //perspective does this in onopen so we do the same here
+        dispatch(setWsStatus(e.type))
+      }
+      websocket._ws.onclose = async (e: any) => {
+        await workspace.current.workspace.clearLayout()
+        await workspace.current.removeTable("main")
+        dispatch(setWsStatus(e.type))
+      }
     }
-    websocket._ws.onclose = async(e:any) => {
-      await workspace.current.workspace.clearLayout()
-      await workspace.current.removeTable("main")
-      dispatch(setWsStatus(e.type))
-    }
-  }
   }, [dispatch, websocket])
-  
 
   useEffect(() => {
     init()
@@ -444,7 +456,7 @@ function Perspective() {
         style={{
           backgroundColor: "transparent",
           zIndex: 1,
-          position: "absolute",
+          position: "absolute"
         }}
         ref={workspace}
       />
