@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+p{
+  margin-bottom: 10px;
+}
+.cursord{
+  cursor:default !important;
+}
+.main-perspective{
+  top: 0;
+  position: absolute;
+}
+.secin input{
+  padding-right: 0 !important;
+}
+.companiesddw{
+  width: 266px;
+}
+.companiesddw>div>div{
+  display: flex;
+  width: 100%;
+}
+body{
+  overflow: hidden; //bad fix
+}
+html,body{
+  color: var(--colors-text);
+  background-color: var(--colors-bg2);
+}
+kbd {
+  font-family: Consolas, "Lucida Console", monospace;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0px 4px;
+  box-shadow: 1px 1px 1px var(--colors-bg6);
+  margin: 2px;
+  font-size: small;
+  vertical-align: text-bottom;
+  background: var(--colors-bg1);
+  font-weight: 500;
+  color: var(--colors-text);
+  cursor: pointer;
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 1px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.perspective-non-ideal-state{
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+  }
+// Perspective menu styling start
+.p-Menu-itemIcon, .p-Menu-itemSubmenuIcon{
+  line-height: 1;
+}
+.p-Menu-itemIcon::before {
+  font-size: 14px;
+}
+.p-Menu-item[data-type="separator"] > div::after {
+  border-top: 1px solid #3b3f46 !important;
+}
+.p-Menu-itemLabel{
+  font-weight: normal;
+  padding: 6px 2px;
+}
+.p-Menu {
+  font-family: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "blueprint-icons-16", sans-serif !important;
+  padding: 0px !important;
+  font-size: 13px !important;
+  color: var(--colors-text) !important;
+  background: var(--colors-bg2) !important;
+}
+.nobg rect{
+  display: none;
+}
+.filterSec input{
+  height: 31px;
+}
+.linkmenuitems li{
+  width: 100%
+}
+.wrapper{
+  width: fit-content;
+  padding: 1em
+}
+.wrapper p,.wrapper li{
+  font-size: 12px;
+}
+.wrapper ul{
+  margin-left: 2em;
+}
+.wrapper h5{
+  margin: .5em;
+}
+.wrapper h5:nth-of-type(3n+1){
+  margin: .5em 0em .5em 0em;
+  font-size: 1em;
+}
+.wrapper h3{
+  display: none;
+}
+.wrapper{
+  max-height: 50vh;
+  overflow: auto;
+}
+.wrapper p{
+  display: none
+}
+.watchlist .bp4-submenu-icon{
+  display: none;
+}
+.tagWimg{
+  top: 2px !important;
+  padding: 2px !important
+
+}
+.text-pop-up-top {
+	-webkit-animation: text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.text-focus-in {
+	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+perspective-workspace {
+  --workspace-master--background-color: var(--colors-bg1);
+  --workspace-tabbar--background-color: var(--colors-bg1);
+  --workspace-tabbar--border: 1px solid var(--colors-bg3);
+  --workspace-tabbar--color: var(--colors-text);
+  --workspace-secondary--color: var(--colors-text);
+  --workspace-tabbar--border-color: var(--colors-bg3);
+  --workspace-tabbar--icon-color: var(--colors-text);
+}
+perspective-viewer[theme="Material Dark"].workspace-master-widget{
+  --plugin--background: var(--colors-bg1)
+}
+
+perspective-viewer[theme="Material Dark"], .perspective-viewer-material-dark{
+  --plugin--background: var(--colors-bg1);
+  --config-button--padding: 10px 3px;
+  background-color: var(--colors-bg2);
+  --config-button--color: var(--colors-text);
+  --input-placeholder--color:var(--colors-text);
+
+}
+perspective-viewer[theme="Material Light"], .perspective-viewer-material-light{
+  --config-button--padding: 10px 3px ;
+  background-color: var(--colors-bg1);
+  --config-button--color: var(--colors-text);
+  --input-placeholder--color:var(--colors-text);
+}
+ @-webkit-keyframes text-pop-up-top {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    text-shadow: none;
+  }
+
+  100% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+@keyframes text-pop-up-top {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    text-shadow: none;
+  }
+  100% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #afafaf, 0 3px 0 #aaaaaa, 0 4px 0 #747474, 0 5px 0 #636363, 0 6px 0 #555555, 0 7px 0 #3d3d3d, 0 8px 0 #383838, 0 9px 0 #272727, 0 50px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+ @-webkit-keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+body::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
