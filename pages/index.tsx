@@ -144,7 +144,7 @@ const Home: NextPage = (props: any) => {
   return (
     <>
       <Head>
-        <title>{title + " - Shortex"}</title>
+        <title>{title + " - " + process.env.NEXT_PUBLIC_APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Layout>

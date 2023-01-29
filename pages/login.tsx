@@ -55,7 +55,7 @@ const Login: NextPage = (props: any) => {
   return (
     <>
       <Head>
-        <title>Login | shortex.app</title>
+        <title>Login - {process.env.NEXT_PUBLIC_APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
@@ -72,13 +72,9 @@ const Login: NextPage = (props: any) => {
 
         <Flex className="bp4-text-large justify-center flex-col w-fit m-auto">
           <Card elevation={3}>
-            {/* <H3>Welcome to the shortex terminal</H3> */}
             <Flex className="w-full sm:gap-3 flex-col sm:flex-col mb-4">
               <Link href={process.env.NEXT_PUBLIC_WEB_URL as string}>
-                <div
-                  className="w-52 cursor-pointer"
-                  title="Find out more at shortex.app"
-                >
+                <div className="w-52 cursor-pointer" title="Find out more">
                   <Logos />
                 </div>
               </Link>

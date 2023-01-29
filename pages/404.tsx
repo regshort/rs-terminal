@@ -8,7 +8,7 @@ const Forofor: NextPage = () => {
   return (
     <>
       <Head>
-        <title>404 - shortex.app</title>
+        <title>404 - {process.env.NEXT_PUBLIC_APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Flex
@@ -29,7 +29,7 @@ const Forofor: NextPage = () => {
           className="text-focus-in"
           style={{ marginTop: "9em", flexDirection: "column" }}
         >
-          <H4>Whoosy this really should not happen</H4>
+          <H4>Whoops this really should not happen</H4>
           <Link href={"/"}>
             <Button icon="home" text="Go back Home" />
           </Link>

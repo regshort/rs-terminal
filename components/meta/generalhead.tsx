@@ -1,7 +1,7 @@
 const GeneralHead = ({ description, ogUrl, ogImage, ogTitle }: any) => {
   return (
     <>
-      <link rel="manifest" href="/manifest.json" />
+      {/* <link rel="manifest" href="/manifest.json" /> */}
 
       <link
         rel="apple-touch-icon"
@@ -30,10 +30,16 @@ const GeneralHead = ({ description, ogUrl, ogImage, ogTitle }: any) => {
       <meta name="msapplication-config" content="/icons/browserconfig.xml" />
       <meta name="theme-color" content="#ffffff" />
 
-      <meta name="application-name" content="Shortex Terminal" />
+      <meta
+        name="application-name"
+        content={process.env.NEXT_PUBLIC_APP_NAME}
+      />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-      <meta name="apple-mobile-web-app-title" content="Shortex Terminal" />
+      <meta
+        name="apple-mobile-web-app-title"
+        content={process.env.NEXT_PUBLIC_APP_NAME}
+      />
       <meta name="format-detection" content="telephone=no" />
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="msapplication-tap-highlight" content="no" />
@@ -46,7 +52,11 @@ const GeneralHead = ({ description, ogUrl, ogImage, ogTitle }: any) => {
 
       <meta property="og:url" content={ogUrl} key="ogurl" />
       <meta property="og:image" content={ogImage} key="ogimage" />
-      <meta property="og:site_name" content="shortex.app" key="ogsitename" />
+      <meta
+        property="og:site_name"
+        content={process.env.NEXT_PUBLIC_APP_NAME}
+        key="ogsitename"
+      />
       <meta property="og:title" content={ogTitle} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
     </>

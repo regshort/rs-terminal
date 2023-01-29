@@ -12,14 +12,14 @@ export const authOptions: NextAuthOptions = {
   providers: [
     EmailProvider({
       server: {
-        host: "in-v3.mailjet.com",
-        port: 587,
+        host: process.env.MAILJET_HOST,
+        port: process.env.MAILJET_PORT,
         auth: {
-          user: "cc56d04cb37df9d93fc52ea7d14887d4",
-          pass: "8f67fbbf39ab6540aaae2ffe69c5524a"
+          user: process.env.MAILJET_USER,
+          pass: process.env.MAILJET_PASS
         }
       },
-      from: "admin@shortex.app"
+      from: process.env.MAILJET_FROM_ADDRESS
     }),
 
     GoogleProvider({

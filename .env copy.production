@@ -4,12 +4,12 @@ NEXT_PUBLIC_TWITTER="regshortapp"
 NEXT_PUBLIC_APP_DESCRIPTION="Maximize your market edge with regshort a professional and powerful web terminal used to streamline financial data and facilitate stock research"
 
 #URI
-NEXT_PUBLIC_WEB_URL="http://localhost:3000"
-NEXT_PUBLIC_APP_URL="http://localhost:3001"
-NEXT_PUBLIC_DOCS_URL="http://localhost:3002"
+NEXT_PUBLIC_WEB_URL="https://regshort.com"
+NEXT_PUBLIC_APP_URL="https://terminal.regshort.com"
+NEXT_PUBLIC_DOCS_URL="https://docs.regshort.com"
 NEXT_PUBLIC_STATUS_URL="https://status.regshort.com"
-NEXT_PUBLIC_WS_URL="ws://localhost:3333"
-NEXT_PUBLIC_COOKIE_DOMAIN=".localhost"
+NEXT_PUBLIC_WS_URL="wss://ws.regshort.com"
+NEXT_PUBLIC_COOKIE_DOMAIN=".regshort.com"
 
 #MAILJET
 MAILJET_HOST="in-v3.mailjet.com"
@@ -24,7 +24,7 @@ NEXT_PUBLIC_MATOMO_APP_SITE_ID=4
 NEXT_PUBLIC_MATOMO_DOCS_SITE_ID=5
 
 #AUTH
-NEXTAUTH_URL="http://localhost:3001"
+NEXTAUTH_URL="https://terminal.regshort.com"
 NEXTAUTH_SECRET=e5d03b0e72a0296b8529fdb72af711c09c82681e324ee7945170b98ff7033928
 
 #GIT auth

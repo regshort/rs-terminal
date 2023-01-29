@@ -22,7 +22,7 @@ class MyDocument extends Document {
 
             <meta
               name="description"
-              content="Streamed Interactive analytics for short exempt data, create and share workspaces, watchlists and much more"
+              content={process.env.NEXT_PUBLIC_APP_DESCRIPTION}
             />
             <meta
               name="keywords"
@@ -32,24 +32,20 @@ class MyDocument extends Document {
             <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
             <meta name="language" content="English" />
             <GeneralHead
-              description={
-                "Streamed Interactive analytics for short exempt data, create and share workspaces, watchlists and much more"
-              }
+              description={process.env.NEXT_PUBLIC_APP_DESCRIPTION}
               ogUrl={process.env.NEXT_PUBLIC_WEB_URL as string}
               ogImage={
                 (process.env.NEXT_PUBLIC_WEB_URL as string) + "/sapp.png"
               }
-              ogTitle={"terminal.shortex.app"}
+              ogTitle={process.env.NEXT_PUBLIC_APP_NAME}
             />
             <TwitterHead
-              description={
-                "Streamed Interactive analytics for short exempt data, create and share workspaces, watchlists and much more"
-              }
+              description={process.env.NEXT_PUBLIC_APP_DESCRIPTION}
               ogUrl={process.env.NEXT_PUBLIC_WEB_URL as string}
               ogImage={
                 (process.env.NEXT_PUBLIC_WEB_URL as string) + "/sapp.png"
               }
-              ogTitle={"terminal.shortex.app"}
+              ogTitle={process.env.NEXT_PUBLIC_APP_NAME}
             />
           </Head>
           <body>

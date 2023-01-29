@@ -26,7 +26,7 @@ const Noaccess: NextPage = () => {
     return (
       <>
         <Head>
-          <title>No Access - shortex.app</title>
+          <title>No Access - {process.env.NEXT_PUBLIC_APP_NAME}</title>
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"
@@ -36,10 +36,14 @@ const Noaccess: NextPage = () => {
           <Card elevation={3}>
             <H4>No access</H4>
             <p>
-              Shortex is invite only for now
+              {process.env.NEXT_PUBLIC_APP_NAME} is invite only for now
               <br /> Message{" "}
-              <Link href="https://twitter.com/shortexapp">@shortexapp</Link> on
-              twitter to get an invite
+              <Link
+                href={"https://twitter.com/" + process.env.NEXT_PUBLIC_TWITTER}
+              >
+                {process.env.NEXT_PUBLIC_TWITTER}
+              </Link>{" "}
+              on twitter to get an invite
             </p>
             <ButtonGroup className="justify-between w-full">
               <Button minimal icon="log-out" onClick={() => signOut()}>
