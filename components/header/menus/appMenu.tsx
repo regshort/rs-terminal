@@ -65,15 +65,8 @@ export const AppDropDown = () => {
               className="py-[5px]"
               label={`© ${new Date().getFullYear()}`}
               text={
-                <div
-                  className="miniLogo nobg "
-                  style={{
-                    marginTop: "3px",
-                    width: "65px",
-                    marginLeft: "-2px"
-                  }}
-                >
-                  <Logos />
+                <div className="miniLogo nobg ">
+                  {process.env.NEXT_PUBLIC_APP_NAME?.split(" ")[0]}
                 </div>
               }
             />
@@ -133,8 +126,8 @@ export const AppDropDown = () => {
       }
     >
       <Button className="m-0 p-0">
-        <div style={{ width: "15px" }} className="nobg sonly opacity-50">
-          <LogoMini />
+        <div className=" opacity-50 uppercase text-base font-bold">
+          {process.env.NEXT_PUBLIC_APP_NAME?.split(" ")[0][0]}
         </div>
       </Button>
     </Popover2>
