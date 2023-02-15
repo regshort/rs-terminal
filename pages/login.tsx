@@ -75,7 +75,10 @@ const Login: NextPage = (props: any) => {
             <Flex className="w-full sm:gap-3 flex-col sm:flex-col mb-4">
               <Link href={process.env.NEXT_PUBLIC_WEB_URL as string}>
                 <div className="w-52 cursor-pointer" title="Find out more">
-                  <Logos />
+                  {/* <Logos /> */}
+                  <h1 className="h-6 font-serif text-4xl mb-4 leading-none tracking-wide sm:block">
+                    reg<span className="font-extrabold">sho</span>rt
+                  </h1>
                 </div>
               </Link>
             </Flex>
