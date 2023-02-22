@@ -11,9 +11,8 @@ const ImageWithFallback = (props: any) => {
   const [size, setSize] = useState<any>(["22px", "22px"])
   // const hasImage = secs.includes(company.ticker)
   const myLoader = ({ src, width, quality }: any) => {
-    return `${process.env.NEXT_PUBLIC_CDN}${src}.png?w=${width}&q=${
-      quality || 75
-    }`
+    return `${process.env.NEXT_PUBLIC_CDN}${src}.png?w=${width}&q=${quality ||
+      75}`
   }
 
   const bg = insearch !== true ? "var(--colors-bgi)" : ""
@@ -23,8 +22,8 @@ const ImageWithFallback = (props: any) => {
         minimal
         style={{
           position: "relative",
-          width: inwatchlist ? 20 : 29,
-          height: inwatchlist ? 20 : 29,
+          width: 20,
+          height: 20,
           padding: 2,
           margin: 0,
           borderRadius: 0,
@@ -38,7 +37,7 @@ const ImageWithFallback = (props: any) => {
               : insearch
               ? "var(--colors-text)"
               : "var(--colors-texti)",
-          fontWeight: "bold",
+          fontWeight: "bold"
         }}
       >
         {hasImage && (
@@ -49,7 +48,7 @@ const ImageWithFallback = (props: any) => {
             alt={alt}
             loader={myLoader}
             src={alt}
-            onLoadingComplete={(e) =>
+            onLoadingComplete={e =>
               setSize([e.naturalHeight + "px", e.naturalWidth + "px"])
             }
             {...rest}
