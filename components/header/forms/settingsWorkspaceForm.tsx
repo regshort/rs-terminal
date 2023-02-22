@@ -29,7 +29,7 @@ function WorkspaceSettings() {
   const relativeDate = useAppSelector(dateIndex)
   const [initDone, setInitDone] = useState(false)
 
-  const { data: userDefaultConfigId, error: ud_error } = useSWR(
+  const { data: wsUserDefault, error: ud_error } = useSWR(
     "/api/user/default",
     fetcher
   )
@@ -50,11 +50,11 @@ function WorkspaceSettings() {
     setFromName(b.name)
     setFormDescription(b.description)
     setFormPrivate(b.private)
-    setFormUserDefault(userDefaultConfigId === b.id)
+    setFormUserDefault(wsUserDefault === b.id)
     setFormRelative(b.relativeDate !== null)
     setFormWatchlist(b.watchlist)
     setInitDone(true)
-  }, [activeSWR, userDefaultConfigId])
+  }, [activeSWR, wsUserDefault])
 
   useEffect(() => {
     if (activeSWR) init()
@@ -151,28 +151,19 @@ function WorkspaceSettings() {
     mutate
   ])
 
-  async function makeDefault(id2set: any) {
-    let unset = false
-    if (formUserDefault) unset = true
-    await fetch(`/api/user/`, {
-      method: "PATCH",
+  async function makeDefault(workspace: any, isSame: boolean) {
+    await fetch(`/api/user/default`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        data: {
-          defaultWorkspaceId: unset ? "" : id2set
-        }
+        isSame: isSame,
+        id: workspace.id
       })
     })
       .then((res: any) => {
         mutate("/api/user/default")
-        addToast({
-          message: !unset
-            ? `Updated user default to ${id2set}`
-            : `Unset user default to none`,
-          intent: "success"
-        })
       })
       .catch(err => {
         console.log(err)
@@ -229,7 +220,7 @@ function WorkspaceSettings() {
           <Switch
             disabled={active.creator === session?.user.id ? false : true}
             id="private"
-            label={formPrivate + ""}
+            label={"Private"}
             innerLabelChecked="on"
             innerLabel="off"
             defaultChecked={formPrivate}
@@ -245,10 +236,10 @@ function WorkspaceSettings() {
             label="User default"
             innerLabelChecked="on"
             innerLabel="off"
-            defaultChecked={userDefaultConfigId === active.id ? true : false}
+            defaultChecked={wsUserDefault.id === active.id ? true : false}
             onChange={() => {
               setFormUserDefault(!formUserDefault)
-              makeDefault(active.id)
+              makeDefault(active, wsUserDefault.id === active.id)
             }}
           />
         </FormGroup>
