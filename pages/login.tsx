@@ -55,7 +55,7 @@ const Login: NextPage = (props: any) => {
   return (
     <>
       <Head>
-        <title>Login - {process.env.NEXT_PUBLIC_APP_NAME}</title>
+        <title>Login - {process.env.NEXT_PUBLIC_APP_NAME as string}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
