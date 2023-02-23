@@ -40,7 +40,7 @@ export default function Header() {
 
             <ButtonGroup>
               <ConnectionStatus />
-              <DataSelector />
+              {/* <DataSelector /> */}
               <Warnings />
               <ThemeSwitch />
             </ButtonGroup>
