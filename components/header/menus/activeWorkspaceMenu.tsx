@@ -64,7 +64,7 @@ function ActiveWorkspace() {
               }
             >
               <div
-                className="leading-loose font-bold      "
+                className="leading-loose font-bold cursor-pointer"
                 title={
                   active.name
                     ? "Your currently loaded workspace is " + active.name
