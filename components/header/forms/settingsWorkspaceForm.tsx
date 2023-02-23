@@ -180,7 +180,7 @@ function WorkspaceSettings() {
   return (
     <>
       <div style={{ width: "300px", height: "100%", padding: "0.5em" }}>
-        <H5>Workspace Settings</H5>
+        {/* <H5>Workspace Settings</H5> */}
 
         <div className="mb-4">
           {active.creator !== session?.user.id && (
