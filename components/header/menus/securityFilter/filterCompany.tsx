@@ -21,7 +21,7 @@ import { popoverOpen } from "../../../../redux/menuSlice"
 import { Flex } from "../../../../stitches.config"
 
 // Exports
-function FilterCompanyMenu(props: { disabled: any }) {
+function FilterCompanyMenu() {
   const dispatch = useAppDispatch()
   const currentConfig = useAppSelector(WSC_CurrentConfig)
   const [selectedItem, setSelectedItem] = useState<any>([])

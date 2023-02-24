@@ -55,10 +55,10 @@ export default function Header() {
               content={
                 <Menu>
                   <AppDropDown />
-                  <WorkspaceMenu disabled={router.pathname !== "/"} />
-                  <WatchlistDropDown disabled={router.pathname !== "/"} />
-                  <FilterDateMenu disabled={router.pathname !== "/"} />
-                  <FilterCompanyMenu disabled={router.pathname !== "/"} />
+                  <WorkspaceMenu />
+                  <WatchlistDropDown />
+                  <FilterDateMenu />
+                  <FilterCompanyMenu />
                 </Menu>
               }
             >

@@ -22,7 +22,7 @@ import NonIdealMenuItem from "./nonIdealMenu"
 import MultiSelectCompanyWatchlist from "./securityFilter/multiSelectCompanyWatchlist"
 import { Flex } from "../../../stitches.config"
 
-function WatchlistDropDown(props: { disabled: boolean | undefined }) {
+function WatchlistDropDown() {
   const dispatch = useAppDispatch()
   const { data: session, status } = useSession()
   const { data: linkedWatchlists, error: lw_errir } = useSWR(
@@ -171,7 +171,6 @@ function WatchlistDropDown(props: { disabled: boolean | undefined }) {
       canEscapeKeyClose={true}
       placement="bottom-start"
       interactionKind="hover"
-      disabled={props.disabled}
       onOpened={() => dispatch(setOpenPopover(Date.now()))}
       content={
         <Menu>
@@ -305,7 +304,6 @@ function WatchlistDropDown(props: { disabled: boolean | undefined }) {
       <Button
         rightIcon={<Icon icon="geosearch" />}
         title="Watchlist menu, create, load and manage watchlists here"
-        disabled={props.disabled}
         text="Watchlist"
       />
     </Popover2>

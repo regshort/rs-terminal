@@ -83,9 +83,10 @@ function ScrollingSecs() {
     if (selectedItem === undefined) return
     handleSubmitCF()
   }, [selectedItem, handleSubmitCF])
-  const listItems = data.map((sec: any) => {
+  const listItems = data.map((sec: any, i: any) => {
     return (
       <Tag
+        key={i}
         minimal
         intent={sec[0] < 0 ? "danger" : "success"}
         style={{ marginRight: ".5em" }}

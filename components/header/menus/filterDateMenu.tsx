@@ -19,7 +19,7 @@ import {
 import { useState } from "react"
 import { Flex } from "../../../stitches.config"
 
-export const FilterDateMenu = (props: { disabled: boolean | undefined }) => {
+export const FilterDateMenu = () => {
   const dispatch = useAppDispatch()
   const currentConfig = useAppSelector(WSC_CurrentConfig)
   const dateI = useAppSelector(dateIndex)
@@ -124,7 +124,6 @@ export const FilterDateMenu = (props: { disabled: boolean | undefined }) => {
       interactionKind="hover"
       autoFocus={false}
       enforceFocus={false}
-      disabled={props.disabled}
       onOpened={() => dispatch(setOpenPopover(Date.now()))}
       onInteraction={(nextState, e: any) => {
         if (e === undefined || e.target.nodeName === "SELECT") return
@@ -176,7 +175,6 @@ export const FilterDateMenu = (props: { disabled: boolean | undefined }) => {
       }
     >
       <Button
-        disabled={props.disabled}
         text="Date"
         rightIcon={
           <Flex className="w-[15px] h-[20px] relative">
