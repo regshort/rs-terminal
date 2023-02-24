@@ -22,6 +22,7 @@ import dynamic from "next/dynamic"
 import { CtxOrReq } from "next-auth/client/_utils"
 import { addToast } from "./_app"
 import { Flex } from "../stitches.config"
+import Alphawarning from "../components/alphaWarning"
 const Logos = dynamic(() => import("../components/logo"), { ssr: false })
 const LoadingComp = dynamic(import("../components/loading"), { ssr: false })
 
@@ -58,7 +59,7 @@ const Login: NextPage = (props: any) => {
         <title>Login - {process.env.NEXT_PUBLIC_APP_NAME as string}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-
+      <Alphawarning />
       <Flex className="flex-col w-full h-screen">
         <Button
           style={{ position: "absolute", right: 0, top: 0, zIndex: 999 }}
