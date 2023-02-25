@@ -1,4 +1,13 @@
-import { Button, ButtonGroup, Card, H1, H2, H4, H5 } from "@blueprintjs/core"
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  H1,
+  H2,
+  H4,
+  H5,
+  Icon
+} from "@blueprintjs/core"
 import { NextPage } from "next"
 import Head from "next/head"
 import Link from "next/link"
@@ -56,7 +65,11 @@ const Me: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="max-w-5xl mx-auto mt-2">
-        <div>
+        <div className="flex items-center gap-5">
+          <Link href={"/"}>
+            <Button icon="arrow-left"></Button>
+          </Link>
+
           <H2>Account Settings</H2>
         </div>
         <div className="flex flex-col gap-10">
