@@ -41,10 +41,19 @@ const Login: NextPage = (props: any) => {
       })
     }
   }, [query, router, session])
-
+  useEffect(() => {
+    if ("email" in query) {
+      addToast({
+        message: "A sign in link has been sent to your email address.",
+        intent: "success",
+        timeout: 10000
+      })
+    }
+  }, [query])
   useEffect(() => {
     if (router && session) redir()
   }, [redir, router, session])
+
   const validateEmail = (email: string) => {
     if (validator.isEmail(email)) {
       return true

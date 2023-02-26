@@ -8,6 +8,9 @@ import EmailProvider from "next-auth/providers/email"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { prisma } from "../../../lib/db"
 export const authOptions: NextAuthOptions = {
+  pages: {
+    verifyRequest: "/auth/verify-request"
+  },
   adapter: PrismaAdapter(prisma),
   providers: [
     EmailProvider({
