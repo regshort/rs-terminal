@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import type { AppState, AppThunk } from "./store"
+import { boolean } from "mathjs"
 
 // properties available on the typed object
 export interface Settings_config {
@@ -16,6 +17,7 @@ export interface Settings_config {
   saveWorkspaceAs: boolean
   newWorkspace: boolean,
   appStatus: any,
+  screenshotMode: boolean
 }
 
 const initialState: Settings_config = {
@@ -30,7 +32,8 @@ const initialState: Settings_config = {
   saveWorkspace: false,
   saveWorkspaceAs: false,
   newWorkspace: false,
-  appStatus: {}
+  appStatus: {},
+  screenshotMode: false,
 }
 
 export const settingsSlice = createSlice({
@@ -74,6 +77,9 @@ export const settingsSlice = createSlice({
     setAppVersion: (state, action: PayloadAction<any>) => {
       state.appVersion = action.payload
     },
+    setScreenshotMode: (state, action: PayloadAction<any>) => {
+      state.screenshotMode = action.payload
+    },
   },
 })
 
@@ -90,6 +96,7 @@ export const {
   setSaveWorkspace,
   setSaveWorkspaceAs,
   setNewWorkspace,
+  setScreenshotMode
 } = settingsSlice.actions
 
 // The function below is called a selector and allows us to select a value from
@@ -115,4 +122,6 @@ export const wsStatus = (state: AppState) =>
   state.settingsSlice.wsStatus
   export const appStatus = (state: AppState) =>
   state.settingsSlice.appStatus
+  export const screenshotMode = (state: AppState) =>
+  state.settingsSlice.screenshotMode
 export default settingsSlice.reducer

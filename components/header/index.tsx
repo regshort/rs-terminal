@@ -13,9 +13,11 @@ import { Popover2 } from "@blueprintjs/popover2"
 import ThemeSwitch from "./menus/themeSwitch"
 import ConnectionStatus from "./menus/connectionStatusMenu"
 import { Flex } from "../../stitches.config"
+import { useAppSelector } from "../../redux/hooks"
+import { screenshotMode } from "../../redux/settingsSlice"
 
 export default function Header() {
-  const router = useRouter()
+  const screenshot = useAppSelector(screenshotMode)
 
   const { data: session, status } = useSession()
   return (
@@ -23,8 +25,11 @@ export default function Header() {
       {session && session.user.canAccess && (
         <>
           <Flex
-            css={{ justifyContent: "space-between" }}
-            className="hidden sm:flex navigation"
+            className={
+              screenshot
+                ? "hidden sm:flex navigation justify-between px-[8px]"
+                : "hidden sm:flex navigation justify-between"
+            }
           >
             <ButtonGroup>
               <AppDropDown />
