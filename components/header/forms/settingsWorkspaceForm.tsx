@@ -192,117 +192,123 @@ function WorkspaceSettings() {
     <>
       <div style={{ width: "300px", height: "100%", padding: "0.5em" }}>
         {/* <H5>Workspace Settings</H5> */}
-
-        <div className="mb-4">
-          {active.creator !== session?.user.id && (
-            <Callout intent="warning" className="mb-3">
-              You cannot edit this workspace, save it as a new one.
-            </Callout>
-          )}
-          <H5>
-            <EditableText
+        {active.creator !== session?.user.id && (
+          <Callout intent="warning">
+            You cannot edit this workspace, save it as a new one.{" "}
+            <kbd>ctrl+alt+shift+s</kbd>
+          </Callout>
+        )}
+        {active.creator === session?.user.id && (
+          <>
+            <div className="mb-4">
+              <H5>
+                <EditableText
+                  disabled={active.creator === session?.user.id ? false : true}
+                  defaultValue={active.name as any}
+                  value={formName || "no data?"}
+                  placeholder="Click to edit name"
+                  onChange={setFromName}
+                  onConfirm={submitNameChange}
+                  maxLength={42}
+                  multiline
+                  confirmOnEnterKey={true}
+                />
+              </H5>
+              <EditableText
+                disabled={active.creator === session?.user.id ? false : true}
+                defaultValue={active.description as any}
+                value={formDescription || ""}
+                placeholder="Click to edit description"
+                onChange={setFormDescription}
+                onConfirm={submitDescriptionChange}
+                maxLength={244}
+                confirmOnEnterKey={true}
+                multiline
+              />
+            </div>
+            <FormGroup
+              label="Options"
               disabled={active.creator === session?.user.id ? false : true}
-              defaultValue={active.name as any}
-              value={formName || "no data?"}
-              placeholder="Click to edit name"
-              onChange={setFromName}
-              onConfirm={submitNameChange}
-              maxLength={42}
-              multiline
-              confirmOnEnterKey={true}
-            />
-          </H5>
-          <EditableText
-            disabled={active.creator === session?.user.id ? false : true}
-            defaultValue={active.description as any}
-            value={formDescription || ""}
-            placeholder="Click to edit description"
-            onChange={setFormDescription}
-            onConfirm={submitDescriptionChange}
-            maxLength={244}
-            confirmOnEnterKey={true}
-            multiline
-          />
-        </div>
-        <FormGroup
-          label="Options"
-          disabled={active.creator === session?.user.id ? false : true}
-        >
-          <Switch
-            disabled={active.creator === session?.user.id ? false : true}
-            id="private"
-            label={"Private"}
-            innerLabelChecked="on"
-            innerLabel="off"
-            checked={formPrivate}
-            onChange={(e: any) => {
-              setFormPrivate(e.target.checked)
-              setChanged(true)
-            }}
-          />
-          <Switch
-            disabled={active.creator === session?.user.id ? false : true}
-            id="default"
-            label="User default"
-            innerLabelChecked="on"
-            innerLabel="off"
-            checked={wsUserDefault.id === active.id ? true : false}
-            onChange={() => {
-              setFormUserDefault(!formUserDefault)
-              makeDefault(active, wsUserDefault.id === active.id)
-            }}
-          />
-        </FormGroup>
-        <FormGroup
-          disabled={
-            active.creator === session?.user.id ? relativeDate === -1 : true
-          }
-          label="Relative Date"
-          labelFor="relativeDate"
-          labelInfo={"(beta)"}
-          helperText={`Set this if you dont want harcoded date filters`}
-        >
-          <Switch
-            disabled={
-              active.creator === session?.user.id ? relativeDate === -1 : true
-            }
-            id="relativeDate"
-            label={
-              relativeDate !== -1
-                ? `Set ${dateIndexToString(relativeDate)} relatively`
-                : `Relative Date`
-            }
-            innerLabelChecked="on"
-            innerLabel="off"
-            checked={formRelative || false}
-            onChange={(e: any) => {
-              console.log(relativeDate)
+            >
+              <Switch
+                disabled={active.creator === session?.user.id ? false : true}
+                id="private"
+                label={"Private"}
+                innerLabelChecked="on"
+                innerLabel="off"
+                checked={formPrivate}
+                onChange={(e: any) => {
+                  setFormPrivate(e.target.checked)
+                  setChanged(true)
+                }}
+              />
+              <Switch
+                disabled={active.creator === session?.user.id ? false : true}
+                id="default"
+                label="User default"
+                innerLabelChecked="on"
+                innerLabel="off"
+                checked={wsUserDefault.id === active.id ? true : false}
+                onChange={() => {
+                  setFormUserDefault(!formUserDefault)
+                  makeDefault(active, wsUserDefault.id === active.id)
+                }}
+              />
+            </FormGroup>
+            <FormGroup
+              disabled={
+                active.creator === session?.user.id ? relativeDate === -1 : true
+              }
+              label="Relative Date"
+              labelFor="relativeDate"
+              labelInfo={"(beta)"}
+              helperText={`Set this if you dont want harcoded date filters`}
+            >
+              <Switch
+                disabled={
+                  active.creator === session?.user.id
+                    ? relativeDate === -1
+                    : true
+                }
+                id="relativeDate"
+                label={
+                  relativeDate !== -1
+                    ? `Set ${dateIndexToString(relativeDate)} relatively`
+                    : `Relative Date`
+                }
+                innerLabelChecked="on"
+                innerLabel="off"
+                checked={formRelative || false}
+                onChange={(e: any) => {
+                  console.log(relativeDate)
 
-              setFormRelative(e.target.checked)
-              setChanged(true)
-            }}
-          />
-        </FormGroup>
-        <FormGroup
-          disabled={active.creator === session?.user.id ? false : true}
-          label="Watchlist View"
-          labelFor="watchlist"
-          labelInfo="(beta)"
-          helperText="We will loop over your watchlist with this view. "
-        >
-          <Switch
-            disabled={active.creator === session?.user.id ? false : true}
-            id="watchlist"
-            label="Watchlist View"
-            innerLabelChecked="on"
-            innerLabel="off"
-            checked={formWatchlist || false}
-            onChange={(e: any) => {
-              setFormWatchlist(e.target.checked)
-              setChanged(true)
-            }}
-          />
-        </FormGroup>
+                  setFormRelative(e.target.checked)
+                  setChanged(true)
+                }}
+              />
+            </FormGroup>
+            <FormGroup
+              disabled={active.creator === session?.user.id ? false : true}
+              label="Watchlist View"
+              labelFor="watchlist"
+              labelInfo="(beta)"
+              helperText="We will loop over your watchlist with this view. "
+            >
+              <Switch
+                disabled={active.creator === session?.user.id ? false : true}
+                id="watchlist"
+                label="Watchlist View"
+                innerLabelChecked="on"
+                innerLabel="off"
+                checked={formWatchlist || false}
+                onChange={(e: any) => {
+                  setFormWatchlist(e.target.checked)
+                  setChanged(true)
+                }}
+              />
+            </FormGroup>
+          </>
+        )}
       </div>
     </>
   )
