@@ -12,14 +12,14 @@ export const authOptions: NextAuthOptions = {
   providers: [
     EmailProvider({
       server: {
-        host: process.env.MAILJET_HOST,
-        port: process.env.MAILJET_PORT,
+        host: process.env.SG_HOST,
+        port: process.env.SG_PORT,
         auth: {
-          user: process.env.MAILJET_USER,
-          pass: process.env.MAILJET_PASS
+          user: "apikey",
+          pass: process.env.SG_APIKEY
         }
       },
-      from: process.env.MAILJET_FROM_ADDRESS
+      from: process.env.SG_SENDFROM
     }),
 
     GoogleProvider({
