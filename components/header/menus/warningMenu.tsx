@@ -42,6 +42,7 @@ function Warnings() {
       >
         <Button
           minimal
+          intent="danger"
           className="browser-warning-button"
           icon="warning-sign"
         />

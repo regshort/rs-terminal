@@ -96,7 +96,7 @@ const Me: NextPage = () => {
           </div>
           <div>
             <H4>Delete User</H4>
-            <p>Download all your data associated with this user</p>
+            <p>Delete all your data associated with this user</p>
             <Flex className="gap-3 items-center">
               <Popover2
                 captureDismiss
