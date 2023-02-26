@@ -132,7 +132,7 @@ function WatchlistDropDown() {
             key={index}
             onClick={() => loadFromWatchlist(ws_item, wl_item)}
             icon={
-              ws_item.global_default
+              ws_item.globalDefault
                 ? "globe"
                 : ws_item.private
                 ? "eye-off"

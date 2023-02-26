@@ -159,7 +159,7 @@ function Workspaces(props: any) {
       if (filter[0] === "date") {
         let popped = filter.slice(0, filter.length - 1)
         let date = new Date(filter[2])
-        if (workspace.relative_date !== null) return
+        if (workspace.relativeDate !== null) return
         tags.push(
           <Tag intent="warning" key={index}>
             {popped.join(" ")} {moment(date).format("MMMM Do YYYY")}
@@ -301,9 +301,9 @@ function Workspaces(props: any) {
                                 Last updated:{" "}
                                 {moment(workspace.updatedAt).fromNow()}
                                 <br />
-                                {workspace.relative_date && (
+                                {workspace.relativeDate && (
                                   <div>
-                                    Relative Date: {workspace.relative_date}
+                                    Relative Date: {workspace.relativeDate}
                                   </div>
                                 )}
                               </Text>

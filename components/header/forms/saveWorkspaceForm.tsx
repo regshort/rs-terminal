@@ -124,11 +124,11 @@ function SaveWorkSpaceForm(props: any) {
           name: formName,
           description: formDescription || "",
           default: formDefault,
-          global_default: formGlobalDefault,
+          globalDefault: formGlobalDefault,
           private: formPrivate,
           workspace: currentConfig,
           watchlist: formWatchlist,
-          relative_date: dateIndexToString(relativeDate)
+          relativeDate: dateIndexToString(relativeDate)
         }),
         method: "POST"
       })
@@ -290,7 +290,7 @@ function SaveWorkSpaceForm(props: any) {
       {session && session.user && session.user.isAdmin && (
         <FormGroup label="Admin Options">
           <Switch
-            id="global_default"
+            id="globalDefault"
             label="Global Default"
             innerLabelChecked="on"
             innerLabel="off"

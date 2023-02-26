@@ -45,12 +45,12 @@ export default async function handler(req: any, res: any) {
             name: toPost.name,
             description: toPost.description,
             default: toPost.default,
-            globalDefault: toPost.global_default,
+            globalDefault: toPost.globalDefault,
             private: toPost.private,
             workspace: toPost.workspace,
             creator: session.user.id,
             watchlist: toPost.watchlist,
-            relativeDate: toPost.relative_date
+            relativeDate: toPost.relativeDate
           }
         })
         .then((e: any) => {

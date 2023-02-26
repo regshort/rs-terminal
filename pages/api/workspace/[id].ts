@@ -35,7 +35,7 @@ export default async function handler(req: any, res: any) {
       //     id: post.id,
       //     name: post.name,
       //     default: post.default,
-      //     global_default: post.global_default,
+      //     globalDefault: post.globalDefault,
       //     private: post.private,
       //     workspace: post.workspace,
       //   }
@@ -60,6 +60,8 @@ export default async function handler(req: any, res: any) {
           })
         })
         .catch(async (e: any) => {
+          console.log(e)
+
           res.status(400).send({
             error: e
           })

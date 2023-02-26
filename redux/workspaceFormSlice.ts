@@ -8,9 +8,9 @@ export interface WorkspaceForm_configs {
   description: string
   private: boolean
   user_default: boolean
-  global_default: boolean
+  globalDefault: boolean
   watchlist: boolean
-  relative_date: boolean
+  relativeDate: boolean
 }
 
 const initialState: WorkspaceForm_configs = {
@@ -18,9 +18,9 @@ const initialState: WorkspaceForm_configs = {
   description: "",
   private: false,
   user_default: false,
-  global_default: false,
+  globalDefault: false,
   watchlist: false,
-  relative_date: false,
+  relativeDate: false,
 }
 
 export const workspaceFormSlice = createSlice({
@@ -29,7 +29,7 @@ export const workspaceFormSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     setRelativeDate: (state, action: PayloadAction<any>) => {
-      state.relative_date = action.payload
+      state.relativeDate = action.payload
     },
     setName: (state, action: PayloadAction<any>) => {
       state.name = action.payload
@@ -44,7 +44,7 @@ export const workspaceFormSlice = createSlice({
       state.user_default = action.payload
     },
     setGlobalDefault: (state, action: PayloadAction<any>) => {
-      state.global_default = action.payload
+      state.globalDefault = action.payload
     },
     setWatchlist: (state, action: PayloadAction<any>) => {
       state.watchlist = action.payload
@@ -54,7 +54,7 @@ export const workspaceFormSlice = createSlice({
       state.description = ""
       state.private = false
       state.user_default = false
-      state.global_default = false
+      state.globalDefault = false
       state.watchlist = false
     },
   },
@@ -75,7 +75,7 @@ export const {
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const workspaceFormRelativeDate = (state: AppState) =>
-  state.workspaceFormSlice.relative_date
+  state.workspaceFormSlice.relativeDate
 export const workspaceForm = (state: AppState) => state.workspaceFormSlice.name
 export const workspaceFormName = (state: AppState) =>
   state.workspaceFormSlice.name
@@ -86,7 +86,7 @@ export const workspaceFormPrivate = (state: AppState) =>
 export const workspaceFormUserDefault = (state: AppState) =>
   state.workspaceFormSlice.user_default
 export const workspaceFormGlobalDefault = (state: AppState) =>
-  state.workspaceFormSlice.global_default
+  state.workspaceFormSlice.globalDefault
 export const workspaceFormWatchlist = (state: AppState) =>
   state.workspaceFormSlice.watchlist
 

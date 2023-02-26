@@ -80,7 +80,7 @@ function Watchlists(props: any) {
           id: watchlist.id,
           creator: watchlist.creator,
           data: {
-            global_default: !watchlist.global_default
+            globalDefault: !watchlist.globalDefault
           }
         })
       })
@@ -88,7 +88,7 @@ function Watchlists(props: any) {
           const ress = await res.json()
           const newData = watchlists.map((ws: { id: string }) =>
             ws.id === watchlist.id
-              ? { ...ws, global_default: !watchlist.global_default }
+              ? { ...ws, globalDefault: !watchlist.globalDefault }
               : ws
           )
           mutate("/api/watchlist?query=" + query)
@@ -146,7 +146,7 @@ function Watchlists(props: any) {
           >
             <Flex className="gap-5 items-center" key={watchlist.id}>
               <div className="ml-3">
-                {/* {watchlist.global_default && (
+                {/* {watchlist.globalDefault && (
                   <Tooltip2
                     minimal
                     position="top"
@@ -204,13 +204,13 @@ function Watchlists(props: any) {
                       position="bottom"
                       minimal
                       content={
-                        watchlist.global_default
+                        watchlist.globalDefault
                           ? "This is a global Default"
                           : "Make this a global default"
                       }
                     >
                       <Button
-                        icon={watchlist.global_default ? "circle" : "globe"}
+                        icon={watchlist.globalDefault ? "circle" : "globe"}
                         onClick={() => toggleGlobalDefault(watchlist)}
                       />
                     </Tooltip2>

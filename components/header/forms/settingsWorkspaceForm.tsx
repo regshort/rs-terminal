@@ -1,4 +1,11 @@
-import { Callout, EditableText, FormGroup, H5, Switch } from "@blueprintjs/core"
+import {
+  Button,
+  Callout,
+  EditableText,
+  FormGroup,
+  H5,
+  Switch
+} from "@blueprintjs/core"
 import { useSession } from "next-auth/react"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import useSWR, { useSWRConfig } from "swr"
@@ -84,7 +91,7 @@ function WorkspaceSettings() {
         })
       })
       .then(e => {
-        addToast({ message: "Successfully updated name" })
+        addToast({ message: "Updated name" })
         mutate("/api/workspace")
         dispatch(WSC_setActiveName(formName))
       })
@@ -110,7 +117,7 @@ function WorkspaceSettings() {
       }),
       method: "PATCH"
     }).then(e => {
-      addToast({ message: "Successfully updated description" })
+      addToast({ message: "Updated description" })
       dispatch(WSC_setActiveDescription(formDescription))
       mutate("/api/workspace")
     })
@@ -124,6 +131,8 @@ function WorkspaceSettings() {
   ])
 
   const submitChanges = useCallback(async () => {
+    console.log("submit changes")
+
     await fetch(`/api/workspace/${active.id}`, {
       headers: {
         "Content-Type": "application/json"
@@ -132,14 +141,14 @@ function WorkspaceSettings() {
         data: {
           private: formPrivate,
           watchlist: formWatchlist,
-          relative_date: dateIndexToString(relativeDate)
+          relativeDate: formRelative ? dateIndexToString(relativeDate) : null
         },
         creator: active.creator,
         id: active.id
       }),
       method: "PATCH"
     }).then(e => {
-      addToast({ message: "Successfully saved workspace" })
+      addToast({ message: "Saved workspace" })
       mutate("/api/workspace")
     })
   }, [
@@ -147,6 +156,7 @@ function WorkspaceSettings() {
     active.creator,
     formPrivate,
     formWatchlist,
+    formRelative,
     relativeDate,
     mutate
   ])
@@ -163,6 +173,7 @@ function WorkspaceSettings() {
       })
     })
       .then((res: any) => {
+        addToast({ message: "Changed user default" })
         mutate("/api/user/default")
       })
       .catch(err => {
@@ -223,10 +234,9 @@ function WorkspaceSettings() {
             label={"Private"}
             innerLabelChecked="on"
             innerLabel="off"
-            defaultChecked={formPrivate}
-            onChange={e => {
-              // e.preventDefault()
-              setFormPrivate(!formPrivate)
+            checked={formPrivate}
+            onChange={(e: any) => {
+              setFormPrivate(e.target.checked)
               setChanged(true)
             }}
           />
@@ -236,7 +246,7 @@ function WorkspaceSettings() {
             label="User default"
             innerLabelChecked="on"
             innerLabel="off"
-            defaultChecked={wsUserDefault.id === active.id ? true : false}
+            checked={wsUserDefault.id === active.id ? true : false}
             onChange={() => {
               setFormUserDefault(!formUserDefault)
               makeDefault(active, wsUserDefault.id === active.id)
@@ -264,9 +274,11 @@ function WorkspaceSettings() {
             }
             innerLabelChecked="on"
             innerLabel="off"
-            defaultChecked={formRelative || false}
-            onChange={() => {
-              setFormRelative(!formRelative)
+            checked={formRelative || false}
+            onChange={(e: any) => {
+              console.log(relativeDate)
+
+              setFormRelative(e.target.checked)
               setChanged(true)
             }}
           />
@@ -284,9 +296,9 @@ function WorkspaceSettings() {
             label="Watchlist View"
             innerLabelChecked="on"
             innerLabel="off"
-            defaultChecked={formWatchlist || false}
-            onChange={() => {
-              setFormWatchlist(!formWatchlist)
+            checked={formWatchlist || false}
+            onChange={(e: any) => {
+              setFormWatchlist(e.target.checked)
               setChanged(true)
             }}
           />

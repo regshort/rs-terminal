@@ -67,7 +67,7 @@ function OmniBar() {
               dispatch(setOmni(false))
             }}
             icon={
-              ws_item.global_default
+              ws_item.globalDefault
                 ? "globe"
                 : ws_item.private
                 ? "eye-off"
@@ -160,9 +160,9 @@ function OmniBar() {
       config4views.push({
         type: "tab-area",
         widgets: [
-          "PERSPECTIVE_GENEREATED_ID_" + watchlist.companies[index].ticker,
+          "PERSPECTIVE_GENEREATED_ID_" + watchlist.companies[index].ticker
         ],
-        currentIndex: 0,
+        currentIndex: 0
       })
     }
 
@@ -181,27 +181,27 @@ function OmniBar() {
         const tickers = splitsTickers[index]
         children2add.push({
           type: "split-area",
-          sizes: Array.apply(null, Array(tickers.length)).map(function (x, i) {
+          sizes: Array.apply(null, Array(tickers.length)).map(function(x, i) {
             return 1 / tickers.length
           }),
           children: tickerConfigs,
-          orientation: "horizontal",
+          orientation: "horizontal"
         })
       }
       createdConfig = {
         detail: {
           main: {
             type: "split-area",
-            sizes: Array.apply(null, Array(splitsTickers.length)).map(function (
+            sizes: Array.apply(null, Array(splitsTickers.length)).map(function(
               x,
               i
             ) {
               return 1 / splitsTickers.length
             }),
             children: children2add,
-            orientation: "vertical",
-          },
-        },
+            orientation: "vertical"
+          }
+        }
       }
     } else {
       createdConfig = {
@@ -210,16 +210,13 @@ function OmniBar() {
         detail: {
           main: {
             type: "split-area",
-            sizes: Array.apply(null, Array(tickers.length)).map(function (
-              x,
-              i
-            ) {
+            sizes: Array.apply(null, Array(tickers.length)).map(function(x, i) {
               return 1 / tickers.length
             }),
             children: config4views,
-            orientation: "horizontal",
-          },
-        },
+            orientation: "horizontal"
+          }
+        }
       }
     }
     createdConfig.viewers = createdViews
@@ -233,7 +230,7 @@ function OmniBar() {
       overlayProps={{
         className: `flex justify-center items-center ${
           omni_global ? "visible" : "hidden"
-        } ${omni_global ? "h-screen" : "h-0"}`,
+        } ${omni_global ? "h-screen" : "h-0"}`
       }}
       inputProps={{
         value: input,
@@ -241,7 +238,7 @@ function OmniBar() {
         onKeyDown: (e: any) => {
           if (e.altKey && e.ctrlKey && e.key === " ") dispatch(setOmni(false))
         },
-        className: "opacity-100 bg-[var(--colors-bg2)]",
+        className: "opacity-100 bg-[var(--colors-bg2)]"
       }}
       onItemSelect={(item, event: any) => {
         if (
