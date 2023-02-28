@@ -5,7 +5,6 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'npm i yarn'
         sh 'yarn'
         sh 'yarn build'
       }
