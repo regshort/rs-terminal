@@ -19,6 +19,7 @@ export default async function handler(req: any, res: any) {
               workspace: true,
               watchlist: true,
               default: true,
+              updatedAt: true,
               globalDefault: true,
               relativeDate: true,
               private: true,
