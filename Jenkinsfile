@@ -13,9 +13,9 @@ pipeline {
     stage('Deploy') {
       steps {
         sshagent(['ssh']) {
-            sh 'scp -r -o StrictHostKeyChecking=no .next regshort@rs-web:/git/rs-web/'
-            sh 'ssh regshort@rs-web "cd /git/rs-web/ && git pull"'
-            sh 'ssh regshort@rs-web "/usr/local/lib/npm/bin/pm2 restart web"'
+            sh 'scp -r -o StrictHostKeyChecking=no .next regshort@rs-web:/git/rs-terminal/'
+            sh 'ssh regshort@rs-web "cd /git/rs-terminal/ && git pull"'
+            sh 'ssh regshort@rs-web "/usr/local/lib/npm/bin/pm2 restart terminal"'
         }
       }
     }
