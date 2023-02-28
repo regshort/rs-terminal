@@ -139,8 +139,9 @@ export const FilterDateMenu = () => {
             content={<></>}
             onContextMenu={e => {
               e.preventDefault()
-              dispatch(setDateIndex(-1))
-              dispatch(setDateRange([null, null]))
+              handleRangeChange([null, null])
+              // dispatch(setDateIndex(-1))
+              // dispatch(setDateRange([null, null]))
               return
             }}
           >
