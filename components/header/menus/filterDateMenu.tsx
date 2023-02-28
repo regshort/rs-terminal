@@ -95,16 +95,20 @@ export const FilterDateMenu = () => {
               if (element[0] !== "date") return element
             }
           )
-          currentCopy.viewers[key].filter = filtered
-          currentCopy.viewers[key].filter.push(
-            ["date", ">=", moment(dateRange[0]).unix() * 1000],
-            ["date", "<=", moment(dateRange[1]).unix() * 1000]
-          )
+          if (dateRange[0] === null && dateRange[1] === null) {
+            currentCopy.viewers[key].filter = filtered
+          }else{
+            currentCopy.viewers[key].filter = filtered
+            currentCopy.viewers[key].filter.push(
+              ["date", ">=", moment(dateRange[0]).unix() * 1000],
+              ["date", "<=", moment(dateRange[1]).unix() * 1000]
+            )
+          }
         }
       })
       dispatch(WSC_setConfigSetter(currentCopy))
       addToast({
-        message: "setting date filter",
+        message: "setting date filter (fdm)",
         intent: "warning",
         icon: "calendar"
       })

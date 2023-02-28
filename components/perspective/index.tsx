@@ -206,7 +206,7 @@ function Perspective() {
         })
       } else {
         Object.keys(currentCopy.viewers).map((key: any, windex) => {
-          if (dateRange[0] !== null && dateRange[1] === null) {
+          if (dateRange[0] !== null && dateRange[1] === null) { 
             const filtered = currentCopy.viewers[key].filter.filter(
               (element: any, index: any) => {
                 if (element[0] !== "date") return element
@@ -223,20 +223,16 @@ function Perspective() {
                 if (element[0] !== "date") return element
               }
             )
-            if (dateRange[0] === null && dateRange[1] === null) {
-              currentCopy.viewers[key].filter = filtered
-            }else{
               currentCopy.viewers[key].filter = filtered
               currentCopy.viewers[key].filter.push(
                 ["date", ">=", moment(dateRange[0]).unix() * 1000],
                 ["date", "<=", moment(dateRange[1]).unix() * 1000]
               )
-            }
           }
         })
         dispatch(WSC_setConfigSetter(currentCopy))
         addToast({
-          message: "setting date filter",
+          message: "setting date filter (per)",
           intent: "warning",
           icon: "calendar"
         })
