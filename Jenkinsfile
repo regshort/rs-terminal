@@ -1,6 +1,8 @@
 pipeline {
   agent any
-
+  environment {
+    NODE_ENV = "production"
+  }
   tools {nodejs "nodejs"}
   stages {
     stage('Build') {
