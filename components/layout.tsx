@@ -11,7 +11,7 @@ export default function Layout({ children }: Props) {
   return (
     <Provider store={store}>
       <Header />
-      <div style={{ position: "relative", minHeight: "calc(100vh - 40px)" }}>
+      <div style={{ position: "relative" }}>
         {children}
       </div>
     </Provider>
