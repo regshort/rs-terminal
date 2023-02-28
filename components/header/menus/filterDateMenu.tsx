@@ -108,7 +108,7 @@ export const FilterDateMenu = () => {
       })
       dispatch(WSC_setConfigSetter(currentCopy))
       addToast({
-        message: "setting date filter (fdm)",
+        message: "setting date filter",
         intent: "warning",
         icon: "calendar"
       })

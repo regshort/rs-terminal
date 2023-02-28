@@ -232,7 +232,7 @@ function Perspective() {
         })
         dispatch(WSC_setConfigSetter(currentCopy))
         addToast({
-          message: "setting date filter (per)",
+          message: "setting date filter",
           intent: "warning",
           icon: "calendar"
         })
