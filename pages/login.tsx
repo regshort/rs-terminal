@@ -5,7 +5,8 @@ import {
   ButtonGroup,
   InputGroup,
   ControlGroup,
-  Callout
+  Callout,
+  Divider
 } from "@blueprintjs/core"
 import { NextPage, NextPageContext } from "next"
 import { signIn, useSession } from "next-auth/react"
@@ -28,7 +29,7 @@ const Logos = dynamic(() => import("../components/logo"), { ssr: false })
 const LoadingComp = dynamic(import("../components/loading"), { ssr: false })
 
 const Login: NextPage = (props: any) => {
-  const { query } = props
+  const { query, version } = props
   const { theme, setTheme } = useTheme()
   const router = useRouter()
   const [emailInput, setEmailInput] = useState("")
@@ -82,11 +83,12 @@ const Login: NextPage = (props: any) => {
         />
 
         <Flex className="bp4-text-large justify-center flex-col w-fit m-auto">
-        <Callout intent="primary" className="mb-2">
-       Closed Beta for regShort Terminal starting soon
+        <Callout intent="primary" className="mb-2 -mt-20">
+       Closed Beta for regShort Terminal starting soon.<br/>
+       Sign up below to be on the Waitlist.
       </Callout>
           <Card elevation={3}>
-            <Flex className="w-full sm:gap-3 flex-col sm:flex-col mb-4">
+            <Flex className="w-full sflex items-center mb-5">
               <Link href={process.env.NEXT_PUBLIC_WEB_URL as string}>
                 <div className="w-52 cursor-pointer" title="Find out more">
                   {/* <Logos /> */}
@@ -95,28 +97,31 @@ const Login: NextPage = (props: any) => {
                   </h1>
                 </div>
               </Link>
+                <div className="text-xs w-full text-mono text-right" title="Find out more">
+                 v.{version}
+                </div>
             </Flex>
-            <Flex className="flex-col">
-              <ButtonGroup className="gap-2 flex-col sm:flex-row mb-2">
-                <Button fill onClick={() => signIn("discord")} minimal>
+            <Flex className="flex-col ">
+              <ButtonGroup className="gap-2 flex-col sm:flex-row  my-2">
+                <Button fill onClick={() => signIn("discord")} >
                   <Flex className="items-center gap-2">
                     <Discord fill={theme === "light" ? "#5f6b7c" : "#abb3bf"} />
                     <Text>Discord</Text>
                   </Flex>
                 </Button>
-                <Button fill onClick={() => signIn("github")} minimal>
+                <Button fill onClick={() => signIn("github")} >
                   <Flex className="items-center gap-2">
                     <Github fill={theme === "light" ? "#5f6b7c" : "#abb3bf"} />
                     <Text>GitHub</Text>
                   </Flex>
                 </Button>
-                <Button fill onClick={() => signIn("google")} minimal>
+                <Button fill onClick={() => signIn("google")} >
                   <Flex className="items-center gap-2">
                     <Google fill={theme === "light" ? "#5f6b7c" : "#abb3bf"} />
                     <Text>Google</Text>
                   </Flex>
                 </Button>
-                <Button fill onClick={() => signIn("reddit")} minimal>
+                <Button fill onClick={() => signIn("reddit")} >
                   <Flex className="items-center gap-2">
                     <Reddit fill={theme === "light" ? "#5f6b7c" : "#abb3bf"} />
                     <Text>Reddit</Text>
@@ -148,7 +153,6 @@ const Login: NextPage = (props: any) => {
                     placeholder="E-Mail "
                   />
                   <Button
-                    minimal
                     small
                     onClick={() => {
                       if (validateEmail(emailInput)) {
@@ -173,8 +177,17 @@ const Login: NextPage = (props: any) => {
     </>
   )
 }
+
 export default Login
 
-Login.getInitialProps = async ({ req, query }: NextPageContext) => {
-  return { query }
+export async function getServerSideProps({ req, query }: any) {
+  const package_json = require("../package.json")
+  const version = package_json.version
+  const protocol = req?.headers["x-forwarded-proto"] || "http"
+  const baseUrl = req ? `${protocol}://${req.headers.host}` : ""
+  const userAgent = req ? req.headers["user-agent"] : navigator.userAgent
+ 
+  return {
+    props: { userAgent, version, query } // will be passed to the page component as props
+  }
 }
