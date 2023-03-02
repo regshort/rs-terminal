@@ -4,7 +4,8 @@ import {
   Text,
   ButtonGroup,
   InputGroup,
-  ControlGroup
+  ControlGroup,
+  Callout
 } from "@blueprintjs/core"
 import { NextPage, NextPageContext } from "next"
 import { signIn, useSession } from "next-auth/react"
@@ -68,7 +69,7 @@ const Login: NextPage = (props: any) => {
         <title>Login - {process.env.NEXT_PUBLIC_APP_NAME as string}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Alphawarning />
+     
       <Flex className="flex-col w-full h-screen">
         <Button
           style={{ position: "absolute", right: 0, top: 0, zIndex: 999 }}
@@ -81,6 +82,9 @@ const Login: NextPage = (props: any) => {
         />
 
         <Flex className="bp4-text-large justify-center flex-col w-fit m-auto">
+        <Callout intent="primary" className="mb-2">
+       Closed Beta for regShort Terminal starting soon
+      </Callout>
           <Card elevation={3}>
             <Flex className="w-full sm:gap-3 flex-col sm:flex-col mb-4">
               <Link href={process.env.NEXT_PUBLIC_WEB_URL as string}>
@@ -93,26 +97,26 @@ const Login: NextPage = (props: any) => {
               </Link>
             </Flex>
             <Flex className="flex-col">
-              <ButtonGroup className="gap-1 flex-col sm:flex-row">
-                <Button fill onClick={() => signIn("discord")}>
+              <ButtonGroup className="gap-2 flex-col sm:flex-row mb-2">
+                <Button fill onClick={() => signIn("discord")} minimal>
                   <Flex className="items-center gap-2">
                     <Discord fill={theme === "light" ? "#5f6b7c" : "#abb3bf"} />
                     <Text>Discord</Text>
                   </Flex>
                 </Button>
-                <Button fill onClick={() => signIn("github")}>
+                <Button fill onClick={() => signIn("github")} minimal>
                   <Flex className="items-center gap-2">
                     <Github fill={theme === "light" ? "#5f6b7c" : "#abb3bf"} />
                     <Text>GitHub</Text>
                   </Flex>
                 </Button>
-                <Button fill onClick={() => signIn("google")}>
+                <Button fill onClick={() => signIn("google")} minimal>
                   <Flex className="items-center gap-2">
                     <Google fill={theme === "light" ? "#5f6b7c" : "#abb3bf"} />
                     <Text>Google</Text>
                   </Flex>
                 </Button>
-                <Button fill onClick={() => signIn("reddit")}>
+                <Button fill onClick={() => signIn("reddit")} minimal>
                   <Flex className="items-center gap-2">
                     <Reddit fill={theme === "light" ? "#5f6b7c" : "#abb3bf"} />
                     <Text>Reddit</Text>
@@ -120,13 +124,14 @@ const Login: NextPage = (props: any) => {
                 </Button>
               </ButtonGroup>
               <ButtonGroup>
-                <ControlGroup fill className="mt-1" vertical={false}>
+                <ControlGroup fill className="gap-2 mt-1 shadow-none" vertical={false} >
                   <InputGroup
                     type="email"
                     value={emailInput}
                     onChange={e => {
                       setEmailInput(e.target.value)
                     }}
+                    inputClassName="!shadow-none"
                     onKeyDown={e => {
                       if (e.key === "Enter") {
                         if (validateEmail(emailInput)) {
@@ -143,6 +148,7 @@ const Login: NextPage = (props: any) => {
                     placeholder="E-Mail "
                   />
                   <Button
+                    minimal
                     small
                     onClick={() => {
                       if (validateEmail(emailInput)) {

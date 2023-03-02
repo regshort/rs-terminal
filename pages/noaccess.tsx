@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Card, H1, H4, H5 } from "@blueprintjs/core"
+import { Button, ButtonGroup, Card, H1, H3, H4, H5 } from "@blueprintjs/core"
 import { NextPage } from "next"
 import { signOut, useSession } from "next-auth/react"
 import dynamic from "next/dynamic"
@@ -26,24 +26,24 @@ const Noaccess: NextPage = () => {
     return (
       <>
         <Head>
-          <title>No Access - {process.env.NEXT_PUBLIC_APP_NAME}</title>
+          <title>No Access{process.env.NEXT_PUBLIC_APP_NAME}</title>
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"
           />
         </Head>
-        <Flex className="justify-center items-center h-screen">
+        <Flex className="justify-center items-center h-screen text-base">
           <Card elevation={3}>
-            <H4>No access</H4>
+            <H3>No Access</H3>
             <p>
-              {process.env.NEXT_PUBLIC_APP_NAME} is invite only for now
+                {process.env.NEXT_PUBLIC_APP_NAME} is invite only for now. 
               <br /> Message{" "}
               <Link
                 href={"https://twitter.com/" + process.env.NEXT_PUBLIC_TWITTER}
               >
                 {process.env.NEXT_PUBLIC_TWITTER}
               </Link>{" "}
-              on twitter to get an invite
+              on twitter to get an invite.
             </p>
             <ButtonGroup className="justify-between w-full">
               <Button minimal icon="log-out" onClick={() => signOut()}>
