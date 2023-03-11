@@ -3,6 +3,7 @@ const PerspectivePlugin = require("@finos/perspective-webpack-plugin")
 const removeImports = require("next-remove-imports")()
 
 const nextConfig = {
+  output: 'standalone',
   i18n: {
     locales: ["en"],
     defaultLocale: "en"

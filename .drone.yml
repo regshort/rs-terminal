@@ -1,0 +1,53 @@
+---
+kind: pipeline
+type: docker
+name: web
+
+steps:
+  - name: yarn-install
+    image: docker.io/node:lts-alpine
+    commands:
+      - apk add --no-cache libc6-compat
+      - cd /app-build
+      - cp /drone/src/package.json ./
+      - cp /drone/src/package-lock.json ./
+      - npm ci
+      - cp -r /drone/src/* .
+      - npm run build
+    volumes:
+      - name: app-build-dir
+        path: /app-build
+
+  - name: build-image
+    image: gcr.io/kaniko-project/executor:debug
+    environment:
+      USERNAME:
+        from_secret: registry_user
+      PASSWORD:
+        from_secret: registry_password
+    commands:
+      - mkdir -p /kaniko/.docker
+      - echo "{\"auths\":{\"https:\/\/registry.sw.frogtech.dev\/v2\/\":{\"username\":\"$USERNAME\",\"password\":\"$PASSWORD\"}}}" > /kaniko/.docker/config.json
+      - /kaniko/executor --context /app-build --dockerfile Dockerfile --destination registry.sw.frogtech.dev/registry.sw.frogtech.dev/rsterminal:latest
+    volumes:
+      - name: app-build-dir
+        path: /app-build
+
+  - name: deploy
+    image: appleboy/drone-ssh
+    settings:
+      host: sw.frogtech.dev
+      port: 2222
+      username: swarm
+      key:
+        from_secret: swarm_ssh_key
+      script:
+        - docker service update --image registry.sw.frogtech.dev/rsterminal:latest rsterminal_app --with-registry-auth
+
+trigger:
+  event:
+    - push
+    - pull_request
+volumes:
+  - name: app-build-dir
+    temp: {}
