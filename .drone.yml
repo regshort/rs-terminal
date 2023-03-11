@@ -10,10 +10,10 @@ steps:
       - apk add --no-cache libc6-compat
       - cd /app-build
       - cp /drone/src/package.json ./
-      - cp /drone/src/package-lock.json ./
-      - npm ci
+      - cp /drone/src/yarn.lock ./
+      - yarn install --frozen-lockfile
       - cp -r /drone/src/* .
-      - npm run build
+      - yarn build
     volumes:
       - name: app-build-dir
         path: /app-build
