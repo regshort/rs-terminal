@@ -13,6 +13,7 @@ steps:
       - cp /drone/src/yarn.lock ./
       - yarn install --frozen-lockfile
       - cp -r /drone/src/* .
+      - npx primsa generate
       - yarn build
     volumes:
       - name: app-build-dir
