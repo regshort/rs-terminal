@@ -39,5 +39,5 @@ USER bloguser
 EXPOSE 3000
 
 ENV PORT 3000
-CMD [ "npx", "prisma migrate deploy" ]
-CMD ["node", "server.js"]
+
+CMD ["dockerstart.sh"]
