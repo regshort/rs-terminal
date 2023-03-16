@@ -11,9 +11,9 @@ const nextConfig = {
   experimental: { esmExternals: true },
   reactStrictMode: false,
   swcMinify: true,
-  images: {
-    domains: [process.env.NEXT_PUBLIC_CDN]
-  },
+  // images: {
+  //   domains: [process.env.NEXT_PUBLIC_CDN]
+  // },
   compiler: {
     removeConsole: process.env.NODE_ENV !== "development"
   },
